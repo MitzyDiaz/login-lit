@@ -112,6 +112,7 @@ export class LoginComp extends LitElement {
     }
 
     _sendLogin() {
+        let access = false;
         const email = this.shadowRoot.getElementById('inputmail').value;
         console.log('email', email);
         const password = this.shadowRoot.getElementById('inputpas').value;
@@ -119,13 +120,25 @@ export class LoginComp extends LitElement {
         const expReg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         let itsOk = expReg.test(email);
 
-        if (email === '' || password === '') return alert('Ingresa con e-mail y password');
-
-        if (itsOk === true) {
-            alert(`Entraste como ${email}`);
+        if (itsOk === true && password !== '') {
+          access = true;
+          alert('datos correctos');
         } else {
-            alert(`${email} No es un e-mail valido`);
+          alert('datos incorrectos');
         }
+
+        this.dispatchEvent(new CustomEvent('login', {detail: access}));
+
+        // if (email === '' || password === '') {
+        //   alert('Ingresa con e-mail y password');
+        // }  
+          
+
+        // if (itsOk === true) {
+        //     alert(`Entraste como ${email}`);
+        // } else {
+        //     alert(`${email} No es un e-mail valido`);
+        // }
     }
 
 }

@@ -43,15 +43,51 @@
 
   <script type="module">
     import { html, render } from 'lit-html';
+    import { LitElement } from 'lit-element';
     import '../login-comp.js';
+
     render(
       html`
-        <login-comp>
-          some more light-dom
-        </login-comp>
+        <app-prueba></app-prueba>
       `,
       document.querySelector('#demo')
     );
+
+    
+    class AppPrueba extends LitElement {
+      static get properties() {
+        return {
+            isLogin: {
+                type: Boolean
+            }
+        };
+      }
+
+      constructor() {
+        super();
+        this.isLogin = false;
+      }
+
+      render() {
+        return html`
+          ${!this.isLogin ? 
+            html`
+              <login-comp @login="${this._login}">
+                some more light-dom
+              </login-comp>
+            `: 
+            html`
+              <span>Home</span>
+            `}
+        `;
+      }
+
+      _login(e){
+        this.isLogin = e.detail;
+        console.log(this.isLogin);
+      }
+    }
+    customElements.define('app-prueba', AppPrueba);
   </script>
 </body>
 </html>
