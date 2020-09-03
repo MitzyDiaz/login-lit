@@ -4,6 +4,7 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/paper-toast/paper-toast.js';
 
 
 export class LoginComp extends LitElement {
@@ -80,6 +81,15 @@ export class LoginComp extends LitElement {
         height: 20px;
       }
 
+      .toast-corret {
+        --paper-toast-background-color: #00b80e;
+        --paper-toast-color: white;
+      }
+
+      .toast-incorret {
+        --paper-toast-background-color: #b80000;
+        --paper-toast-color: white;
+      }
 
     `;
   }
@@ -121,8 +131,8 @@ export class LoginComp extends LitElement {
             <paper-button raised class="custom" @click="${this._sendLogin}">Enter</paper-button>
           </div>
         </div>
-          
       </paper-card>
+      <paper-toast id="toast" text=""></paper-toast>
     </div>
     `;
   }
@@ -139,10 +149,13 @@ export class LoginComp extends LitElement {
 
       if (itsOk === true && password !== '') {
         access = true;
-        alert('datos correctos');
+        this.shadowRoot.getElementById('toast').text = 'Datos correctos';
+        this.shadowRoot.getElementById('toast').className = 'toast-corret';
       } else {
-        alert('datos incorrectos');
+        this.shadowRoot.getElementById('toast').text = 'Datos incorrectos';
+        this.shadowRoot.getElementById('toast').className = 'toast-incorret';
       }
+      this.shadowRoot.getElementById('toast').open();
 
       this.dispatchEvent(new CustomEvent('login', {detail: {access: access, user: email}}));
     }
