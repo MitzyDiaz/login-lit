@@ -20,22 +20,10 @@
         font-family: sans-serif;
         width: 100vw;
         height: 100vh;
-        background: linear-gradient(150deg, #023af1, #009bc2, #2acdff);
+        background: linear-gradient(150deg, #22223B, #4A4E69, #9A8C98);
         background-size: 400% 300%;
-        animation: BgGradient 10s ease infinite;
     }
 
-    @keyframes BgGradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
   </style>
 </head>
 <body>
@@ -43,6 +31,7 @@
 
   <script type="module">
     import { html, render } from 'lit-html';
+    import { LitElement } from 'lit-element';
     import '../login-comp.js';
     render(
       html`
@@ -52,6 +41,45 @@
       `,
       document.querySelector('#demo')
     );
+
+
+/*NEW UPDATE
+        class AppPrueba extends LitElement {
+          static get properties() {
+            return {
+                isLogin: {
+                    type: Boolean
+                }
+            };
+          }
+
+          constructor() {
+            super();
+            this.isLogin = false;
+          }
+
+          render() {
+            return html`
+              ${!this.isLogin ? 
+                html`
+                  <login-comp @login="${this._login}">
+                    some more light-dom
+                  </login-comp>
+                `: 
+                html`
+                  <span>Home</span>
+                `}
+            `;
+          }
+
+          _login(e){
+            this.isLogin = e.detail;
+            console.log(this.isLogin);
+          }
+        }
+        customElements.define('app-prueba', AppPrueba);
+*/
+
   </script>
 </body>
 </html>

@@ -22,41 +22,63 @@ export class LoginComp extends LitElement {
 
 
       paper-card{
+        background: #F2E9E4;
         display: flex;
         margin: 0 auto;
         margin-top: 10%;
-        border: 4px solid transparent;
-        border-image: linear-gradient(150deg, #f10295, #8e0aaf);
-        border-image-slice:1;
+        width: 35%;
+        height: 30%;
+        border-radius: 10px 10px 10px 15px;
       }
 
       #titulo{
         text-align: center;
+        color: #22223B;
       }
       paper-button.custom {
-      --paper-button-ink-color: var(--paper-pink-a200);
-      --paper-button-flat-keyboard-focus: {
-        background-color: pink !important;
+        background-color: #22223B !important;
         color: white !important;
-      };
-      --paper-button-raised-keyboard-focus: {
-        background-color: red !important;
-        color: white !important;
-      };
-    }
-    paper-button.custom:hover {
-      background-color: pink;
-      color: white;
-    }
-    paper-button.pink {
-      color: pink;
+        width: 100%;
+        margin: 0 auto;
+      }
 
-    }
+      paper-button.custom:hover {
+        background-color: white;
+        color: white;
+      }
 
-    .image{
-      width: 200px;
-      height:200px;
-    }
+       paper-input.custom-input {
+        --paper-input-container-focus-color: #22223B;
+          margin: 10px 0px 10px 0px;
+          padding: 0px 10px 14px 10px; 
+      }
+
+
+      .image{
+        padding: 30px 15px 5px 15px;
+        width: 150px;
+        height:150px;
+      }
+
+      #der{
+        width: 100%;
+        padding: 30px 20px 30px 20px;
+      }
+
+      #izq{
+        border-radius: 0px 0px 0px 10px;
+        padding: 20px;
+        color: #F2E9E4;
+        /*color: #C9ADA7;*/
+        text-align: center;
+        background: #22223B;
+      }
+
+      iron-icon{
+        color: #C9ADA7;
+        width: 20px;
+        height: 20px;
+      }
 
 
     `;
@@ -72,36 +94,68 @@ export class LoginComp extends LitElement {
   constructor() {
     super();
     this.title = 'LOGIN';
-    this.subtitle="COCKTAIL LIST"
+    this.subtitle="COCKTAIL APP"
   }
 
   render() {
     return html`
     <div id="cont">
-      <paper-card>
-      <div style="background: #ccc;">
-      <img class="image" src="img/juice.svg" alt="">
-      <h2 id="titulo">${this.subtitle}</h2>
-      </div>
-      
-      <div>
-        <div class="card-content">
-            
-              <h2 id="titulo">${this.title}</h2>
-              <paper-input id="inputmail" class="custom-input" label="Email">
-                <iron-icon icon="mail" slot="prefix"></iron-icon>
-              </paper-input>
-              <paper-input id="inputpas" class="custom-input" label="Password" type="password">
-                <iron-icon icon="lock" slot="prefix"></iron-icon>
-              </paper-input>
+      <paper-card elevation="0">
+
+        <div id="izq">
+          <img class="image" src="img/martini.svg" alt="">
+          <h2>${this.subtitle}</h2>
+        </div>
+
+        <div id="der">
+          <div class="card-content">
+            <h2 id="titulo">${this.title}</h2>
+            <paper-input id="inputmail" class="custom-input" label="Email">
+              <iron-icon icon="mail" slot="prefix"></iron-icon>
+            </paper-input>
+            <paper-input id="inputpas" class="custom-input" label="Password" type="password">
+              <iron-icon icon="lock" slot="prefix"></iron-icon>
+            </paper-input>
           </div>
           <div class="card-actions">
-            <paper-button raised class="custom pink">link</paper-button>
+            <paper-button raised class="custom" @click="${this._sendLogin}">Enter</paper-button>
+          </div>
         </div>
-      </div>
           
       </paper-card>
-      </div>
+    </div>
     `;
   }
-}
+
+/*NEW UPDATE*/
+    _sendLogin() {
+      let access = false;
+      const email = this.shadowRoot.getElementById('inputmail').value;
+      console.log('email', email);
+      const password = this.shadowRoot.getElementById('inputpas').value;
+      console.log('password', password);
+      const expReg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      let itsOk = expReg.test(email);
+
+      if (itsOk === true && password !== '') {
+        access = true;
+        alert('datos correctos');
+      } else {
+        alert('datos incorrectos');
+      }
+
+      //this.dispatchEvent(new CustomEvent('login', {detail: access}));
+
+        // if (email === '' || password === '') {
+        //   alert('Ingresa con e-mail y password');
+        // }  
+          
+
+        // if (itsOk === true) {
+        //     alert(`Entraste como ${email}`);
+        // } else {
+        //     alert(`${email} No es un e-mail valido`);
+        // }
+       }
+
+    }
