@@ -7,8 +7,9 @@ import '@polymer/iron-icons/iron-icons.js';
 
 
 export class LoginComp extends LitElement {
-  static get styles() {
-    return css`
+
+    static get styles() {
+        return css `
       :host {
         display: block;
         padding: 25px;
@@ -60,48 +61,71 @@ export class LoginComp extends LitElement {
 
 
     `;
-  }
+    }
 
-  static get properties() {
-    return {
-      title: { type: String },
-      subtitle: { type: String },
-    };
-  }
+    static get properties() {
+        return {
+            title: {
+                type: String
+            },
+            subtitle: {
+                type: String
+            }
+        };
+    }
 
-  constructor() {
-    super();
-    this.title = 'LOGIN';
-    this.subtitle="COCKTAIL LIST"
-  }
+    constructor() {
+        super();
+        this.title = 'LOGIN';
+        this.subtitle = "COCKTAIL LIST"
+    }
 
-  render() {
-    return html`
+    render() {
+
+        return html `
     <div id="cont">
       <paper-card>
+
       <div style="background: #ccc;">
-      <img class="image" src="img/juice.svg" alt="">
-      <h2 id="titulo">${this.subtitle}</h2>
+        <img class="image" src="img/juice.svg" alt="">
+        <h2 id="titulo">${this.subtitle}</h2>
       </div>
       
       <div>
         <div class="card-content">
-            
-              <h2 id="titulo">${this.title}</h2>
-              <paper-input id="inputmail" class="custom-input" label="Email">
-                <iron-icon icon="mail" slot="prefix"></iron-icon>
-              </paper-input>
-              <paper-input id="inputpas" class="custom-input" label="Password" type="password">
-                <iron-icon icon="lock" slot="prefix"></iron-icon>
-              </paper-input>
-          </div>
-          <div class="card-actions">
-            <paper-button raised class="custom pink">link</paper-button>
+        <h2 id="titulo">${this.title}</h2>
+          <paper-input id="inputmail" class="custom-input" label="Email">
+            <iron-icon icon="mail" slot="prefix"></iron-icon>
+          </paper-input>
+          <paper-input id="inputpas" class="custom-input" label="Password" type="password">
+            <iron-icon icon="lock" slot="prefix"></iron-icon>
+          </paper-input>
+        </div>
+        <div class="card-actions">
+          <paper-button raised class="custom pink" @click="${this._sendLogin}">link</paper-button>
         </div>
       </div>
           
       </paper-card>
       </div>
     `;
-  }
+    }
+
+    _sendLogin() {
+        const email = this.shadowRoot.getElementById('inputmail').value;
+        console.log('email', email);
+        const password = this.shadowRoot.getElementById('inputpas').value;
+        console.log('password', password);
+        const expReg = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        let itsOk = expReg.test(email);
+
+        if (email === '' || password === '') return alert('Ingresa con e-mail y password');
+
+        if (itsOk === true) {
+            alert(`Entraste como ${email}`);
+        } else {
+            alert(`${email} No es un e-mail valido`);
+        }
+    }
+
 }
