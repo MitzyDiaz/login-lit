@@ -80,6 +80,15 @@ export class LoginComp extends LitElement {
         height: 20px;
       }
 
+      @media screen and (max-width: 800px) {
+        #izq {
+          display: none;
+        }
+
+        .paperCardCont {
+          width: 90%;
+        }
+      }
 
     `;
   }
@@ -100,7 +109,7 @@ export class LoginComp extends LitElement {
   render() {
     return html`
     <div id="cont">
-      <paper-card elevation="0">
+      <paper-card elevation="0" class="paperCardCont">
 
         <div id="izq">
           <img class="image" src="img/martini.svg" alt="">
