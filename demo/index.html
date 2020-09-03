@@ -49,13 +49,15 @@
             return {
                 isLogin: {
                     type: Boolean
-                }
+                },
+                user: { type: String},
             };
           }
 
           constructor() {
             super();
             this.isLogin = false;
+            this.user = '';
           }
 
           render() {
@@ -73,8 +75,10 @@
           }
 
           _login(e){
-            this.isLogin = e.detail;
+            this.isLogin = e.detail.access;
+            this.user = e.detail.user;
             console.log(this.isLogin);
+            console.log(this.user);
           }
         }
         customElements.define('app-prueba', AppPrueba);

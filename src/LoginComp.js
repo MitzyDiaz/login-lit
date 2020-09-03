@@ -144,18 +144,7 @@ export class LoginComp extends LitElement {
         alert('datos incorrectos');
       }
 
-      this.dispatchEvent(new CustomEvent('login', {detail: access}));
-
-        // if (email === '' || password === '') {
-        //   alert('Ingresa con e-mail y password');
-        // }  
-          
-
-        // if (itsOk === true) {
-        //     alert(`Entraste como ${email}`);
-        // } else {
-        //     alert(`${email} No es un e-mail valido`);
-        // }
-       }
-
+      this.dispatchEvent(new CustomEvent('login', {detail: {access: access, user: email}}));
     }
+
+  }
