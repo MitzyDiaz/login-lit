@@ -91,6 +91,16 @@ export class LoginComp extends LitElement {
         }
       }
 
+      .toast-corret {
+        --paper-toast-background-color: #00b80e;
+        --paper-toast-color: white;
+      }
+
+      .toast-incorret {
+        --paper-toast-background-color: #b80000;
+        --paper-toast-color: white;
+      }
+
     `;
   }
 
