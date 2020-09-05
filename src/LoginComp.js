@@ -14,6 +14,10 @@ export class LoginComp extends LitElement {
         display: block;
         padding: 25px;
         color: var(--login-comp-text-color, #000);
+        width: 96.3vw;
+        height: 92.4vh;
+        background: linear-gradient(150deg, #22223B, #4A4E69, #9A8C98);
+        background-size: 400% 300%;
       }
 
       #cont{
