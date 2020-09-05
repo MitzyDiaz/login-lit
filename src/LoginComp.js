@@ -127,7 +127,7 @@ export class LoginComp extends LitElement {
       <paper-card elevation="0" class="paperCardCont">
 
         <div id="izq">
-          <img class="image" src="img/martini.svg" alt="">
+          <img class="image" src="https://firebasestorage.googleapis.com/v0/b/mitzy-workshoplogin.appspot.com/o/martini.svg?alt=media&token=7ef4eece-2b25-466e-b87e-52b3f82b06cf" alt="">
           <h2>${this.subtitle}</h2>
         </div>
 
